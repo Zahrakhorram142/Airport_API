@@ -11,5 +11,7 @@ public class FlightProfile : Profile
         //Source,Dest
         CreateMap<AddFlightDto, Flight>();
         CreateMap<Flight, FlightDto>();
+
+        CreateMap<AddFlightAttributeDto, FlightAttribute>();
     }
 }

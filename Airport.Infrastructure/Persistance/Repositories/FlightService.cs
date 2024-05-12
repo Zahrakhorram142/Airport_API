@@ -37,5 +37,15 @@ public class FlightService:IFlightService
         _context.Flights.Add(flight);
         return _context.SaveChanges()>0;
     }
+    public bool Activate(int flightId) 
+    {
+        var flight = _context.Flights.Where(x=>x.Id== flightId).FirstOrDefault();
+        if (flight is null)
+            return false;
+
+        _context.SaveChanges();
+
+        return true;
+    }
 }
 

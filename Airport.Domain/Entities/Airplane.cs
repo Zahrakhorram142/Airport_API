@@ -2,8 +2,10 @@
 
 namespace Airport.Domain.Entities;
 
-public class Airplane: BaseEntity<short>
+public class Airplane : BaseEntity<short>
 {
-    public string Name { get; set; } 
-
+    public string Model { get; set; }
+    public int Capacity { get; set; }
+    public int YearOfConstruction { get; set; }
+    public string Manufacturer { get; set; }
 }

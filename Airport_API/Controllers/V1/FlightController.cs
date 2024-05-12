@@ -16,21 +16,21 @@ namespace Airport_API.Controllers.V1;
 
 public class FlightController : BaseController
 {
-    private readonly IFlightService _IFlightService;
+    private readonly IFlightService _FlightService;
     private readonly IMapper _mapper;
     private readonly MySettings _mysettings;
-    public FlightController(IFlightService flightBusiness,IMapper mapper,IOptionsSnapshot<MySettings>mySettings) 
+    public FlightController(IFlightService flightService,IMapper mapper,IOptionsSnapshot<MySettings>mySettings) 
     {
         _mysettings = mySettings.Value;
         _mapper = mapper;
-        _IFlightService = flightBusiness;
+        _FlightService = flightService;
     }
 
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        List<Flight>flights=await _IFlightService.GetFlights();
+        List<Flight>flights=await _FlightService.GetFlights();
         return Ok(flights);
     }
 
@@ -39,7 +39,7 @@ public class FlightController : BaseController
     public async Task <IActionResult> Get([FromRoute] int Id)
     {
         
-        Flight flight = await _IFlightService.GetFlightByIdAsync(Id);
+        Flight flight = await _FlightService.GetFlightByIdAsync(Id);
 
         if (flight is null)
             return NotFound();
@@ -67,7 +67,7 @@ public class FlightController : BaseController
     {
        
        var flight=_mapper.Map<Flight>(flightDto);
-        _IFlightService.AddFlight(flight);
+        _FlightService.AddFlight(flight);
 
         return Created();
 
@@ -77,6 +77,12 @@ public class FlightController : BaseController
     public async Task< bool> Update(Flight flight)
     {
         return true;
+    }
+    public bool Activate([FromRoute] int flightId)
+    {
+        var isActivate=_FlightService.Activate(flightId);
+        return isActivate;
+        
     }
 
 }
