@@ -6,6 +6,7 @@ using Airport_API.Shared.Configs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Airport.Infrastructure.Identity;
 using System.Configuration;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,13 +20,16 @@ builder.Services.AddControllers();
   //  .AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 
 string connectionString =builder.Configuration.GetConnectionString("DefaultConnection");
+string userDatabaseconnectionString = builder.Configuration.GetConnectionString("Userdatabase");
+
 //string connectionString="DataSource =.; Initial Catalog = Airport; Integrated Security = True";
 
-          
+
 
 
 builder.Services
     .RegisterApplicationServices()
+    .RegisterIdentityInfrastructureServices(userDatabaseconnectionString)
     .RegisterInfrastructureServices(connectionString)
     .RegisterPresentationServices(builder.Configuration);
 

@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Airport.Application\Airport.Application.csproj" />
     <ProjectReference Include="..\Airport.Infrastructure\Airport.Infrastructure.csproj" />
+    <ProjectReference Include="..\Airpot.Infrastructure.Identity\Airport.Infrastructure.Identity.csproj" />
   </ItemGroup>
 
 </Project>
