@@ -14,6 +14,7 @@ public static class ConfigureService
         connectionString,
                    b => b.MigrationsAssembly(typeof(ApplicationIdentityContext).Assembly.FullName)));
         return services;
+
     }
     
 }
