@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Airport.Application.Dtos;
 
-public class RegisterDto(string Username,string Password,string Firstname,string Lastname);
+public record RegisterDto(string Username,string Password,string FirstName,string LastName);
 

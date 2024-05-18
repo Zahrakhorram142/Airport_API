@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Application.Dtos;
+namespace Airport.Application.Enums;
 
-public record LoginDto(string Username,string Password);
-
+public enum Roles:byte
+{
+    USER = 1,
+    ADMIN =2,
+}

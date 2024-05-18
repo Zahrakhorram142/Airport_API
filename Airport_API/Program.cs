@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Airport.Infrastructure.Identity;
 using System.Configuration;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Airport.Infrastructure.Identity.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
  
@@ -29,9 +30,10 @@ string userDatabaseconnectionString = builder.Configuration.GetConnectionString(
 
 builder.Services
     .RegisterApplicationServices()
-    .RegisterIdentityInfrastructureServices(userDatabaseconnectionString)
+    .RegisterIdentityInfrastructureServices(builder.Configuration,userDatabaseconnectionString)
     .RegisterInfrastructureServices(connectionString)
-    .RegisterPresentationServices(builder.Configuration);
+   .RegisterPresentationServices(builder.Configuration, connectionString);
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -48,6 +50,7 @@ var apiVersioningBuilder = builder.Services.AddApiVersioning(o =>
 
 var app = builder.Build();
 app.UseGlobalException();
+app.MapHealthChecks("/healthz");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

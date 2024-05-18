@@ -1,4 +1,5 @@
-﻿using Airport.Application.Dtos;
+﻿using Airport.Application.Contracts;
+using Airport.Application.Dtos;
 using Airport.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -7,6 +8,11 @@ namespace Airport_API.Controllers.V1;
 
 public class AuthenticationController:BaseController
 {
+    private readonly IAutenticationService _authenticationService;
+    public AuthenticationController(IAutenticationService authenticationService)
+    {
+        _authenticationService=authenticationService;
+    }
     [Route("Login")]
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
@@ -15,8 +21,9 @@ public class AuthenticationController:BaseController
 
     public async Task<IActionResult> Login([FromBody] LoginDto dto,CancellationToken ct)
     {
+        var result=await _authenticationService.Login(dto);
                 
-        return Created();
+        return Ok(result);
 
     }
     [Route("Register")]
@@ -27,8 +34,8 @@ public class AuthenticationController:BaseController
 
     public async Task<IActionResult> Register([FromBody] RegisterDto dto,CancellationToken ct)
     {
-
-        return Created();
+        var result=await _authenticationService.Register(dto);
+        return Ok(result);
 
     }
 }
