@@ -23,4 +23,5 @@ public class AddProductDtoValidator : AbstractValidator<AddFlightDto>
             .WithMessage("Please enter valid Destination");
 
     }
+
 }
