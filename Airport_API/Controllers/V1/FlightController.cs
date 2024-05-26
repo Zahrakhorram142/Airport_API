@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Airport.Domain.Entities;
 using Airport.Application.Contracts;
 using Airport.Application.Dtos;
+using Airport.Application.Wrappers;
 
 
 namespace Airport_API.Controllers.V1;
@@ -30,19 +31,19 @@ public class FlightController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        List<Flight>flights=await _FlightService.GetFlights();
+        var flights=await _FlightService.GetAllAsync();
         return Ok(flights);
     }
 
     [Route("{id}")]
     [HttpGet]
-    public async Task <IActionResult> Get([FromRoute] int Id)
+    public async Task <IActionResult> Get([FromRoute] int id)
     {
         
-        Flight flight = await _FlightService.GetFlightByIdAsync(Id);
+       var flight = await _FlightService.FindByCondition(x=>x.Id== id);
 
-        if (flight is null)
-            return NotFound();
+       if (flight is null)
+         return NotFound();
 
 
        var flightDto=_mapper.Map<FlightDto>(flight);
@@ -67,7 +68,7 @@ public class FlightController : BaseController
     {
        
        var flight=_mapper.Map<Flight>(flightDto);
-        _FlightService.AddFlight(flight);
+        _FlightService.AddAsync(flight);
 
         return Created();
 
@@ -80,8 +81,8 @@ public class FlightController : BaseController
     }
     public bool Activate([FromRoute] int flightId)
     {
-        var isActivate=_FlightService.Activate(flightId);
-        return isActivate;
+        //var isActivate=_FlightService.Activate(flightId);
+        return true;
         
     }
 

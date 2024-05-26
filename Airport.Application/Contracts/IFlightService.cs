@@ -1,10 +1,10 @@
-﻿using Airport.Domain.Entities;
+﻿using Airport.Application.Wrappers;
+using Airport.Domain.Contracts;
+using Airport.Domain.Entities;
+
 namespace Airport.Application.Contracts;
 
-public interface IFlightService
+public interface IFlightService:IGenericRepository<Flight>
 {
-    Task<List<Flight>> GetFlights();
-    Task<Flight> GetFlightByIdAsync(int id);
-    bool AddFlight(Flight flight);
-    bool Activate(int flightId);
+   
 }
