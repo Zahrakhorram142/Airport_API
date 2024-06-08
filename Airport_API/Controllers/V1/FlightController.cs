@@ -29,18 +29,18 @@ public class FlightController : BaseController
 
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken ct)
     {
-        var flights=await _FlightService.GetAllAsync();
+        var flights=await _FlightService.GetAllAsync(ct);
         return Ok(flights);
     }
 
     [Route("{id}")]
     [HttpGet]
-    public async Task <IActionResult> Get([FromRoute] int id)
+    public async Task <IActionResult> Get([FromRoute] int id, CancellationToken ct)
     {
         
-       var flight = await _FlightService.FindByCondition(x=>x.Id== id);
+       var flight = await _FlightService.FindByCondition(x=>x.Id== id,ct);
 
        if (flight is null)
          return NotFound();
@@ -53,7 +53,7 @@ public class FlightController : BaseController
 
     [Route("")]
     [HttpDelete]
-    public async Task <bool> Delete()
+    public async Task <bool> Delete(CancellationToken ct)
     {
         return true;
     }
@@ -64,11 +64,11 @@ public class FlightController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<IActionResult> Add([FromBody] AddFlightDto flightDto)
+    public async Task<IActionResult> Add([FromBody] AddFlightDto flightDto, CancellationToken ct)
     {
        
        var flight=_mapper.Map<Flight>(flightDto);
-        _FlightService.AddAsync(flight);
+        _FlightService.AddAsync(flight,ct);
 
         return Created();
 
