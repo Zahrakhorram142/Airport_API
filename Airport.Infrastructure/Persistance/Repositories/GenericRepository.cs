@@ -34,6 +34,7 @@ public class GenericRepository<TEntity>:IGenericRepository<TEntity> where TEntit
 
     public async Task<bool> DeleteAsync(TEntity entity, CancellationToken ct)
     {
+
         _dbContext.Set<TEntity>().Remove(entity);
         await _dbContext.SaveChangesAsync(ct);
         return true;
