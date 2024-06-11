@@ -1,7 +1,8 @@
-﻿using Airport.Domain.Contracts;
+﻿#nullable disable
+using Airport.Domain.Contracts;
 
 namespace Airport.Domain.Entities;
-public class Flight: BaseEntity<int>
+public class Flight: BaseEntity<int>,IDeletable,IAuditable
 {
     public string Origin { get; set; }
     public string Destination { get; set; }
@@ -16,6 +17,9 @@ public class Flight: BaseEntity<int>
     public void Deactivate() => IsActivate = false;
 
     public ICollection<FlightAttribute> FlightAttributes { get; set; }
-
+    public int DeleteByUserId { get; set; }
+    public DateTime DeletedAt { get; set; }
+    public int UserId { get; set; }
+    public DateTime UpdateAt { get; set; }
 }
 
