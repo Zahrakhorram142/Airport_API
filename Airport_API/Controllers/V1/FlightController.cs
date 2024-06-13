@@ -9,6 +9,10 @@ using Airport.Domain.Entities;
 using Airport.Application.Contracts;
 using Airport.Application.Dtos;
 using Airport.Application.Wrappers;
+using Microsoft.Identity.Client;
+using Airport.Application.Usecases.Flight.Commands;
+using Airport.Domain.ValueObjects;
+using Airport.Infrastructure.Persistance.Repositories;
 
 
 namespace Airport_API.Controllers.V1;
@@ -17,21 +21,21 @@ namespace Airport_API.Controllers.V1;
 
 public class FlightController : BaseController
 {
-    private readonly IFlightService _FlightService;
+    private readonly IFlightService _flightService;
     private readonly IMapper _mapper;
     private readonly MySettings _mysettings;
     public FlightController(IFlightService flightService,IMapper mapper,IOptionsSnapshot<MySettings>mySettings) 
     {
         _mysettings = mySettings.Value;
         _mapper = mapper;
-        _FlightService = flightService;
+        _flightService = flightService;
     }
 
-
+    [Route("{GetAll}")]
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken ct)
+    public async Task<IActionResult> GetAll([FromBody]QueryCriteria queryCriteria = null,CancellationToken ct=default)
     {
-        var flights=await _FlightService.GetAllAsync(ct);
+        var flights = await _flightService.GetAllAsync(ct);
         return Ok(flights);
     }
 
@@ -40,7 +44,7 @@ public class FlightController : BaseController
     public async Task <IActionResult> Get([FromRoute] int id, CancellationToken ct)
     {
         
-       var flight = await _FlightService.FindByCondition(x=>x.Id== id,ct);
+       var flight = await _flightService.FindByCondition(x=>x.Id== id,ct);
 
        if (flight is null)
          return NotFound();
@@ -51,34 +55,31 @@ public class FlightController : BaseController
         return Ok(flightDto);
     }
 
-    [Route("")]
+    [Route("Delete")]
     [HttpDelete]
     public async Task <bool> Delete(CancellationToken ct)
     {
         return true;
     }
 
-    [Route("")]
+    [Route("Add")]
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<IActionResult> Add([FromBody] AddFlightDto flightDto, CancellationToken ct)
-    {
-       
-       var flight=_mapper.Map<Flight>(flightDto);
-        _FlightService.AddAsync(flight,ct);
+    public async Task<IActionResult> Add([FromBody] AddFlightCommand command, CancellationToken ct)
+       =>await SendAsync(command, ct);
 
-        return Created();
-
-    }
-    [Route("")]
+    
+    [Route("Update")]
     [HttpPut]
     public async Task< bool> Update(Flight flight)
     {
         return true;
     }
+    [Route("Activate")]
+    [HttpPut]
     public bool Activate([FromRoute] int flightId)
     {
         //var isActivate=_FlightService.Activate(flightId);

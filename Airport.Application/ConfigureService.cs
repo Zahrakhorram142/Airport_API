@@ -11,6 +11,12 @@ namespace Airport.Application
         { 
             services.AddAutoMapper(typeof(FlightProfile));
             services.AddFluentValidationAutoValidation();
+
+            var assembly= typeof(ConfigureService).Assembly;
+
+            services.AddMediatR(configuration =>
+                configuration.RegisterServicesFromAssembly(assembly));
+
             return services;
         }
     }
