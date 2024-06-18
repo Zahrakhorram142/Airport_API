@@ -2,6 +2,8 @@
 using Airport.Domain.Contracts;
 
 namespace Airport.Domain.Entities;
+
+[Entity]
 public class Flight: BaseEntity<int>,IDeletable,IAuditable
 {
     public string Origin { get; set; }

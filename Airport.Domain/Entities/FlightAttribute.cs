@@ -1,12 +1,8 @@
 ﻿using Airport.Domain.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airport.Domain.Entities;
 
+[Entity]
 public class FlightAttribute:BaseEntity<int>
 {
     public string Key { get; set; }

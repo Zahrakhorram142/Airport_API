@@ -3,6 +3,7 @@ using Airport.Domain.Contracts;
 
 namespace Airport.Domain.Entities;
 
+[Entity]
 public class FlightCategory:BaseEntity<int>
 {
     public int Id { get; set; }

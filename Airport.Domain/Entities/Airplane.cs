@@ -1,7 +1,7 @@
 ﻿using Airport.Domain.Contracts;
 
 namespace Airport.Domain.Entities;
-
+[Entity]
 public class Airplane : BaseEntity<short>
 {
     public string Model { get; set; }
