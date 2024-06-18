@@ -25,6 +25,7 @@ public class ApplicationIdentityContext : IdentityDbContext<ApplicationUser>
         builder.Entity<ApplicationUser>(entity =>
         {
             entity.ToTable(name: "User");
+
         });
 
         builder.Entity<IdentityRole>(entity =>
