@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airport.Infrastructure.Identity.Context;
 
@@ -25,7 +20,6 @@ public class ApplicationIdentityContext : IdentityDbContext<ApplicationUser>
         builder.Entity<ApplicationUser>(entity =>
         {
             entity.ToTable(name: "User");
-
         });
 
         builder.Entity<IdentityRole>(entity =>

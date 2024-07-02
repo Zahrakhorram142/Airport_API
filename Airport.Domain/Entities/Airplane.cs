@@ -1,4 +1,5 @@
-﻿using Airport.Domain.Contracts;
+﻿#nullable disable
+using Airport.Domain.Contracts;
 
 namespace Airport.Domain.Entities;
 [Entity]

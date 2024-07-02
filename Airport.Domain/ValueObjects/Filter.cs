@@ -1,4 +1,4 @@
-﻿
+﻿#nullable disable
 using Airport.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 

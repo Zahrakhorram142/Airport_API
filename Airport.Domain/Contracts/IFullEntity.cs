@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Airport.Domain.Contracts
+﻿namespace Airport.Domain.Contracts
 {
-    internal interface IFullEntity
+    public interface IFullEntity
     {
     }
 }

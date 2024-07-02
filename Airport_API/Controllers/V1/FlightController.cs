@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Net.Mime;
 using AutoMapper;
 using Airport_API.Shared.Configs;
@@ -8,11 +6,9 @@ using Microsoft.Extensions.Options;
 using Airport.Domain.Entities;
 using Airport.Application.Contracts;
 using Airport.Application.Dtos;
-using Airport.Application.Wrappers;
-using Microsoft.Identity.Client;
 using Airport.Application.Usecases.Flight.Commands;
 using Airport.Domain.ValueObjects;
-using Airport.Infrastructure.Persistance.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Airport_API.Controllers.V1;
@@ -54,7 +50,7 @@ public class FlightController : BaseController
 
         return Ok(flightDto);
     }
-
+    [Authorize]
     [Route("Delete")]
     [HttpDelete]
     public async Task <bool> Delete(CancellationToken ct)
@@ -62,6 +58,7 @@ public class FlightController : BaseController
         return true;
     }
 
+    [Authorize]
     [Route("Add")]
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
@@ -71,13 +68,15 @@ public class FlightController : BaseController
     public async Task<IActionResult> Add([FromBody] AddFlightCommand command, CancellationToken ct)
        =>await SendAsync(command, ct);
 
-    
+    [Authorize]
     [Route("Update")]
     [HttpPut]
     public async Task< bool> Update(Flight flight)
     {
         return true;
     }
+
+    [Authorize]
     [Route("Activate")]
     [HttpPut]
     public bool Activate([FromRoute] int flightId)

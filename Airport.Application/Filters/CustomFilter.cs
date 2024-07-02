@@ -1,11 +1,6 @@
 ﻿using Airport.Domain.Enums;
 using Airport.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airport.Application.Filters;
 

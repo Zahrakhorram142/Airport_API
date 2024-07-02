@@ -1,10 +1,8 @@
 ﻿using Airport.Application.Contracts;
 using Airport.Application.Dtos;
 using Airport.Domain.Entities;
-using Airport_API.Shared.Configs;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.Net.Mime;
 
 namespace Airport_API.Controllers.V1;

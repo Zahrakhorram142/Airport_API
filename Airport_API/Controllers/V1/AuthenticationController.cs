@@ -1,6 +1,5 @@
 ﻿using Airport.Application.Contracts;
 using Airport.Application.Dtos;
-using Airport.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 

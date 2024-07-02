@@ -1,5 +1,4 @@
 ﻿using Airport.Application.Profiles;
-using Airport.Domain.Contracts;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 

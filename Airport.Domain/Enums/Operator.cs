@@ -1,5 +1,4 @@
 ﻿
-
 namespace Airport.Domain.Enums;
 
 public enum Operator

@@ -1,6 +1,5 @@
-﻿
-using Airport_API.Shared.Configs;
-using FluentValidation.AspNetCore;
+﻿using Airport_API.Shared.Configs;
+
 namespace Airport_API;
 
 public static class ConfigureService

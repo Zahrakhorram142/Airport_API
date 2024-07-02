@@ -1,5 +1,4 @@
-﻿
-namespace Airport.Domain.Contracts;
+﻿namespace Airport.Domain.Contracts;
 
 public interface IEntity;
 

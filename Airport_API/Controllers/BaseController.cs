@@ -1,7 +1,5 @@
 ﻿using Airport.Application.Wrappers;
 using MediatR;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Airport_API.Controllers

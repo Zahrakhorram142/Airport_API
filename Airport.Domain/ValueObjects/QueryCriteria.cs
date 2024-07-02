@@ -1,4 +1,4 @@
-﻿
+﻿#nullable disable
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Airport.Domain.ValueObjects;

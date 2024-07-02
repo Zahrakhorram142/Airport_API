@@ -2,13 +2,9 @@ using Airport.Application;
 using Airport.Infrastructure;
 using Airport_API;
 using Airport_API.Middlewar;
-using Airport_API.Shared.Configs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
-using Airport.Infrastructure.Identity;
-using System.Configuration;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Airport.Infrastructure.Identity.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,7 +57,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
 app.UseLogUrl();
 
 app.MapControllers();
